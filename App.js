@@ -4,26 +4,46 @@ import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 export default function App() {
   const [outputText, setOutputText] = useState("Pre Text");
   return (
-    <View style={{ padding: 30 }}>
+    <View
+      style={{
+        backgroundColor: "blue",
+        padding: 50,
+        flexDirection: "row",
+        width: "80%",
+        height: 300,
+        justifyContent: "center"
+      }}
+    >
       <View
         style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
+          backgroundColor: "green",
+          flex: 1,
+          justifyContent: "center",
           alignItems: "center"
         }}
       >
-        <TextInput
-          placeholder="New Goal"
-          style={{
-            width: "80%",
-            borderBottomColor: "black",
-            borderBottomWidth: 1,
-            padding: 2
-          }}
-        />
-        <Button title="ADD" />
+        <Text style={{ color: "white", fontSize: 30 }}>1</Text>
       </View>
-      <View></View>
+      <View
+        style={{
+          backgroundColor: "yellow",
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Text style={{ color: "black", fontSize: 30 }}>2</Text>
+      </View>
+      <View
+        style={{
+          backgroundColor: "red",
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Text style={{ color: "white", fontSize: 30 }}>3</Text>
+      </View>
     </View>
   );
 }
