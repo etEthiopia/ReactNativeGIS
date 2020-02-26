@@ -2,47 +2,22 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Button, TextInput } from "react-native";
 
 export default function App() {
-  const [outputText, setOutputText] = useState("Pre Text");
+  const [enteredGoal, setEnteredGoal] = useState("");
+
+
+  const newGoalInputHandler = enteredText =>{
+    setEnteredGoal(enteredText);
+  }
+
+  const addGoalBtnHandler = () => {
+    console.log(enteredGoal);
+  }
+
   return (
-    <View
-      style={{
-        backgroundColor: "blue",
-        padding: 50,
-        flexDirection: "row",
-        width: "80%",
-        height: 300,
-        justifyContent: "center"
-      }}
-    >
-      <View
-        style={{
-          backgroundColor: "green",
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Text style={{ color: "white", fontSize: 30 }}>1</Text>
-      </View>
-      <View
-        style={{
-          backgroundColor: "yellow",
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Text style={{ color: "black", fontSize: 30 }}>2</Text>
-      </View>
-      <View
-        style={{
-          backgroundColor: "red",
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Text style={{ color: "white", fontSize: 30 }}>3</Text>
+    <View style={styles.container}>
+      <View style={styles.addGoal}> 
+        <TextInput onChangeText={newGoalInputHandler} value={enteredGoal} style={styles.newGoal} placeholder="New Goal" />
+        <Button onPress={addGoalBtnHandler} title="ADD" />
       </View>
     </View>
   );
@@ -50,9 +25,19 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    paddingVertical: 40,
+    paddingHorizontal: 15
+  },
+  addGoal:{
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: 'center'
+  },
+  newGoal: {
+    padding: 5,
+    width: "80%",
+    borderBottomColor: "black",
+    borderBottomWidth: 1
   }
 });
