@@ -9,6 +9,7 @@ import {
   FlatList
 } from "react-native";
 import GoalItem from "./components/GoalItem";
+import { GoalInput } from "./components/GoalInput";
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -28,15 +29,12 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.addGoal}>
-        <TextInput
-          onChangeText={newGoalInputHandler}
-          value={enteredGoal}
-          style={styles.newGoal}
-          placeholder="New Goal"
-        />
-        <Button onPress={addGoalBtnHandler} title="ADD" />
-      </View>
+      <GoalInput
+        newGoalMethod={newGoalInputHandler}
+        cGoal={enteredGoal}
+        addGoalBtnMethod={addGoalBtnHandler}
+      />
+
       <FlatList
         data={courseGoals}
         keyExtractor={(item, index) => item.id}
