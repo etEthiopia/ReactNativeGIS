@@ -1,11 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableNativeFeedback } from "react-native";
 
 const GoalItem = props => {
   return (
+    <TouchableNativeFeedback onPress={() => props.deleteGoal(props.goal.key)}>
     <View style={styles.goalView}>
-      <Text> {props.goal} </Text>
+      <Text> {props.goal.value} </Text>
     </View>
+    </TouchableNativeFeedback>
   );
 };
 

@@ -19,6 +19,13 @@ const styles = StyleSheet.create({
   addGoal: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: 10
+  },
+  newGoal: {
+    padding: 5,
+    width: "80%",
+    borderBottomColor: "black",
+    borderBottomWidth: 1
   }
 });

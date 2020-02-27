@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  ScrollView,
-  FlatList
-} from "react-native";
+import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
 import GoalItem from "./components/GoalItem";
 import { GoalInput } from "./components/GoalInput";
 
@@ -27,6 +19,12 @@ export default function App() {
     ]);
   };
 
+  const deleteGoalHandler = goaltoDelete => {
+    setCourseGoals(currentGoals => {
+      return  currentGoals.filter((goal)=>goal.key  !== goaltoDelete)
+    })
+  };
+
   return (
     <View style={styles.container}>
       <GoalInput
@@ -37,9 +35,12 @@ export default function App() {
 
       <FlatList
         data={courseGoals}
-        keyExtractor={(item, index) => item.id}
-        renderItem={itemData => <GoalItem goal={itemData.item.value} />}
+        keyExtractor={(item, index) => item.key}
+        renderItem={itemData => (
+          <GoalItem goal={itemData.item} deleteGoal={deleteGoalHandler} />
+        )}
       />
+
       {/* <ScrollView style={styles.goalsContainer}>
         {courseGoals.map(goal => (
           <View key={goal} style={styles.goalView}>
@@ -62,12 +63,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center"
   },
-  newGoal: {
-    padding: 5,
-    width: "80%",
-    borderBottomColor: "black",
-    borderBottomWidth: 1
-  },
+
   goalsContainer: {
     paddingVertical: 10
   },
