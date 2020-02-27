@@ -8,17 +8,22 @@ import {
   ScrollView,
   FlatList
 } from "react-native";
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
   const [courseGoals, setCourseGoals] = useState([]);
 
   const newGoalInputHandler = enteredText => {
+    console.log(enteredText);
     setEnteredGoal(enteredText);
   };
 
   const addGoalBtnHandler = () => {
-    setCourseGoals(currentGoals => [...courseGoals, {key: Math.random().toString(), value:enteredGoal} ]);
+    setCourseGoals(currentGoals => [
+      ...courseGoals,
+      { key: Math.random().toString(), value: enteredGoal }
+    ]);
   };
 
   return (
@@ -34,12 +39,8 @@ export default function App() {
       </View>
       <FlatList
         data={courseGoals}
-        keyExtractor = {(item, index) => item.id}
-        renderItem={itemData => (
-          <View style={styles.goalView}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
+        keyExtractor={(item, index) => item.id}
+        renderItem={itemData => <GoalItem goal={itemData.item.value} />}
       />
       {/* <ScrollView style={styles.goalsContainer}>
         {courseGoals.map(goal => (
