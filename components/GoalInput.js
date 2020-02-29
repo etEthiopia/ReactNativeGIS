@@ -1,31 +1,40 @@
 import React from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet, Modal } from "react-native";
 
 export const GoalInput = props => {
   return (
-    <View style={styles.addGoal}>
-      <TextInput
-        onChangeText={props.newGoalMethod}
-        value={props.cGoal}
-        style={styles.newGoal}
-        placeholder="New Goal"
-      />
-      <Button onPress={props.addGoalBtnMethod} title="ADD" />
-    </View>
+    <Modal visible = {props.visibility} animationType='slide'>
+      <View style={styles.addGoal} >
+        <TextInput
+          onChangeText={props.newGoalMethod}
+          value={props.cGoal}
+          style={styles.newGoal}
+          placeholder="New Goal"
+        />
+        <View style={{marginBottom: 20}} >
+        <Button onPress={props.addGoalBtnMethod} title="ADD" />
+        </View>
+        <Button color= 'red' onPress={props.cancelGoalBtnMethod} title="CANCEL" />
+      </View>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   addGoal: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 10
+    justifyContent: "center",
+    alignItems: "stretch",
+    flex:1,
+    padding: 30,
+    
   },
   newGoal: {
-    padding: 5,
-    width: "80%",
+    padding: 2,
+    marginBottom: 10,
     borderBottomColor: "black",
     borderBottomWidth: 1
+  },
+  cancelGoal:{
+    
   }
 });

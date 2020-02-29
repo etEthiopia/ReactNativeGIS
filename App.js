@@ -1,11 +1,18 @@
 import React, { useState } from "react";
-import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Button,
+  TouchableOpacity
+} from "react-native";
 import GoalItem from "./components/GoalItem";
 import { GoalInput } from "./components/GoalInput";
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
   const [courseGoals, setCourseGoals] = useState([]);
+  const [isAddModal, setIsAddModal] = useState(false);
 
   const newGoalInputHandler = enteredText => {
     console.log(enteredText);
@@ -13,24 +20,36 @@ export default function App() {
   };
 
   const addGoalBtnHandler = () => {
-    setCourseGoals(currentGoals => [
-      ...courseGoals,
-      { key: Math.random().toString(), value: enteredGoal }
-    ]);
+    if (enteredGoal.length > 0) {
+      setCourseGoals(currentGoals => [
+        ...courseGoals,
+        { key: Math.random().toString(), value: enteredGoal }
+      ]);
+    }
+    setIsAddModal(false);
+  };
+
+  const cancelGoalBtnHandler = () => {
+    setIsAddModal(false);
   };
 
   const deleteGoalHandler = goaltoDelete => {
     setCourseGoals(currentGoals => {
-      return  currentGoals.filter((goal)=>goal.key  !== goaltoDelete)
-    })
+      return currentGoals.filter(goal => goal.key !== goaltoDelete);
+    });
   };
 
   return (
     <View style={styles.container}>
+      <View style={styles.addButton}>
+        <Button title="Add New Goal" onPress={() => setIsAddModal(true)} />
+      </View>
       <GoalInput
         newGoalMethod={newGoalInputHandler}
         cGoal={enteredGoal}
+        visibility={isAddModal}
         addGoalBtnMethod={addGoalBtnHandler}
+        cancelGoalBtnMethod={cancelGoalBtnHandler}
       />
 
       <FlatList
@@ -66,6 +85,9 @@ const styles = StyleSheet.create({
 
   goalsContainer: {
     paddingVertical: 10
+  },
+  addButton: {
+    marginBottom: 20
   },
   goalView: {
     padding: 10,
